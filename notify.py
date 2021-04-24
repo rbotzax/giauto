@@ -109,18 +109,23 @@ class Notify(object):
             log.error(f'Discord FAILED\n{response}')
         return True
 
-    def send(self, app='Genshin Impact Check-In Helper', status='', msg='', **kwargs):
+    def send(self, **kwargs):
+        app  =  'Genshin sign-in assistant'
+        status  =  kwargs . get ( 'status' , '' )
+        msg  =  kwargs . get ( 'msg' , '' )
         hide = kwargs.get('hide', '')
         if isinstance(msg, list) or isinstance(msg, dict):
             # msg = self.to_json(msg)
             msg = '\n\n'.join(msg)
         if not hide:
             log.info(f'Sign-In result: {status}\n\n{msg}')
-
-        if self.PUSH_CONFIG or self.DISCORD_WEBHOOK:
+            
+        self.discordWebhook(app, status, msg)
+        
+        if self.PUSH_CONFIG:
             log.info('Sending push notifications...')
             self.custPush(app, status, msg)
-            self.discordWebhook(app, status, msg)
+            
         else:
             log.info('No social media notifications configured to be sent.')
 
