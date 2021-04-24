@@ -70,10 +70,11 @@ if os.environ['USER_AGENT']:
 
 MESSAGE_TEMPLATE = '''
     {today:#^28}
-    [{region_name}]{uid}
+
     Today's rewards: {award_name} × {award_cnt}
     Monthly Check-In count: {total_sign_day} days
     Check-in result: {status}
+    
     {end:#^28}'''
 
 CONFIG.MESSAGE_TEMPLATE = MESSAGE_TEMPLATE
