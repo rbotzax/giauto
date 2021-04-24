@@ -164,7 +164,7 @@ if __name__ == '__main__':
             log.error(msg)
             ret = -1
         continue
-    notify.send(status=f'Number of successful sign-ins: {success_num} | Number of failed sign-ins: {fail_num}', msg=msg_list)
+    notify.send(status=f'\nNumber of successful sign-ins: {success_num} \nNumber of failed sign-ins: {fail_num}', msg=msg_list)
     if ret != 0:
         log.error('program terminated with errors')
         exit(ret)
