@@ -110,7 +110,7 @@ class Notify(object):
         return True
 
     def send(self, **kwargs):
-        app  =  'Genshin sign-in assistant'
+        app  =  'Genshin Daily Sign-In'
         status  =  kwargs . get ( 'status' , '' )
         msg  =  kwargs . get ( 'msg' , '' )
         hide = kwargs.get('hide', '')
