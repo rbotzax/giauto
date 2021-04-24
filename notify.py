@@ -123,7 +123,7 @@ class Notify(object):
             self.discordWebhook(app, status, msg)
         else:
             log.info('No social media notifications configured to be sent.')
-            loh.info(self.DISCORD_WEBHOOK)
+            log.info(self.DISCORD_WEBHOOK)
 
 
 if __name__ == '__main__':
