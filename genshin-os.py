@@ -73,7 +73,7 @@ class Sign(Base):
             time.sleep(10)
             message = {
                 'today': today,
-                'region_name': '',
+                # 'region_name': '',
                 'uid': uid,
                 'total_sign_day': total_sign_day,
                 'end': '',
