@@ -26,16 +26,21 @@ class Notify(object):
                 与set_data_sub_title互斥,两者都填则本项不生效.
 
     :param DISCORD_WEBHOOK:
-        ## the original repo contained no documentation about how to use this, good luck i guess
+        ## https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
     """
     # Github Actions -> Settings -> Secrets
     # Ensure that the Name exactly matches the parameter names required here
     # And the Value contains the data to be used
 
-    # Custom Push Config
-    PUSH_CONFIG = ''
-    # Discord Webhook
-    DISCORD_WEBHOOK = ''
+    def __init__(self):
+        # Custom Push Config
+        self.PUSH_CONFIG = ''
+        if 'PUSH_CONFIG' in os.environ:
+            self.PUSH_CONFIG = os.environ['PUSH_CONFIG']
+        # Discord Webhook
+        self.DISCORD_WEBHOOK = ''
+        if 'DISCORD_WEBHOOK' in os.environ:
+            self.DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
 
     def pushTemplate(self, method, url, params=None, data=None, json=None, headers=None, **kwargs):
         name = kwargs.get('name')
@@ -61,8 +66,6 @@ class Notify(object):
 
     def custPush(self, text, status, desp):
         PUSH_CONFIG = self.PUSH_CONFIG
-        if 'PUSH_CONFIG' in os.environ:
-            PUSH_CONFIG = os.environ['PUSH_CONFIG']
 
         if not PUSH_CONFIG:
             log.info(f'Custom Notifications SKIPPED')
@@ -92,8 +95,6 @@ class Notify(object):
 
     def discordWebhook(self, text, status, desp):
         DISCORD_WEBHOOK = self.DISCORD_WEBHOOK
-        if 'DISCORD_WEBHOOK' in os.environ:
-            DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
 
         if not DISCORD_WEBHOOK:
             log.info(f'Discord SKIPPED')
