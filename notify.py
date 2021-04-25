@@ -32,11 +32,16 @@ class Notify(object):
     # Ensure that the Name exactly matches the parameter names required here
     # And the Value contains the data to be used
 
-    # Custom Push Config
-    PUSH_CONFIG = ''
-    # Discord Webhook
-    DISCORD_WEBHOOK = ''
-
+    def __init__(self):
+        # Custom Push Config
+        self.PUSH_CONFIG = ''
+        if 'PUSH_CONFIG' in os.environ:
+            self.PUSH_CONFIG = os.environ['PUSH_CONFIG']
+        # Discord Webhook
+        self.DISCORD_WEBHOOK = ''
+        if 'DISCORD_WEBHOOK' in os.environ:
+            self.DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
+            
     def pushTemplate(self, method, url, params=None, data=None, json=None, headers=None, **kwargs):
         name = kwargs.get('name')
         # needs = kwargs.get('needs')
@@ -120,12 +125,10 @@ class Notify(object):
         if not hide:
             log.info(f'Sign-In result: {status}\n\n{msg}')
             
-        self.discordWebhook(app, status, msg)
-        
-        if self.PUSH_CONFIG:
+        if self.PUSH_CONFIG or self.DISCORD_WEBHOOK:
             log.info('Sending push notifications...')
             self.custPush(app, status, msg)
-            
+            self.discordWebhook(app, status, msg)            
         else:
             log.info('No social media notifications configured to be sent.')
 
