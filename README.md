@@ -67,4 +67,4 @@ If you see the green check mark, congratulations, your auto check-in has been su
 4. Go back to the "Secrets" tab on the repository and add a new secret called DISCORD_WEBHOOK.
 ![](https://i.imgur.com/YusKz6V.png)
 5. Run the github action again and check for message in the channel you set the webhook in
-![](https://i.imgur.com/DNewvzh.png)
+![](https://i.imgur.com/0FMvJHW.png)
