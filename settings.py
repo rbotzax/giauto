@@ -68,9 +68,17 @@ log.basicConfig(level=CONFIG.LOG_LEVEL)
 if os.environ['USER_AGENT']:
     CONFIG.WB_USER_AGENT = os.environ['USER_AGENT']
 
+# MESSAGE_TEMPLATE = '''
+#     {today:#^28}
+#     [{region_name}]{uid}
+#     Today's rewards: {award_name} × {award_cnt}
+#     Monthly Check-In count: {total_sign_day} days
+#     Check-in result: {status}
+#     {end:#^28}'''
+
 MESSAGE_TEMPLATE = '''
     {today:#^28}
-    [{region_name}]{uid}
+    ID {uid}
     Today's rewards: {award_name} × {award_cnt}
     Monthly Check-In count: {total_sign_day} days
     Check-in result: {status}
