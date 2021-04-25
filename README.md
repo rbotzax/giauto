@@ -56,3 +56,13 @@
     ![](https://imgur.com/NZnhTlc.png)
 
 If you see the green check mark, congratulations, your auto check-in has been successfully set up.
+
+## Discord Webhooks
+1. Edit channel settings. (Create your own discord server or private channel for this)
+![](https://i.imgur.com/Q0KFNzv.png)
+2. Go into Integrations and view webhooks.
+![](https://i.imgur.com/Z4pfACE.png)
+3. Create a new webhook and copy the URL.
+![](https://i.imgur.com/UyZyp5G.png)
+4. Go back to the "Secrets" tab on the repository and add a new secret called DISCORD_WEBHOOK.
+![](https://i.imgur.com/YusKz6V.png)
