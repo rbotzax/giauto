@@ -127,4 +127,4 @@ class Notify(object):
 
 
 if __name__ == '__main__':
-    Notify().send(app='Genshin Impact Check-In Helper', status='Test Run', msg='Testing integration with social media APIs')
+    Notify().send(app='Genshin Impact Check-In Helper', status='Test Run', msg='Testing integration with social media APIs')    
