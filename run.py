@@ -1,7 +1,7 @@
 import random
 import time
 
-randomSleep = random.randint(5,15)
+randomSleep = random.randint(10,300)
 
 print("Sleeping for: %ds" % randomSleep)
 
