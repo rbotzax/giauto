@@ -76,7 +76,6 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
    ![](https://i.imgur.com/5fBviLV.png)
 
   Enter `USER_AGENT` in KEY and `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0` in VALUE and click Add.
-
     ![](https://i.imgur.com/U592b4t.png)
 
 7. Enter `OS_COOKIE` in KEY and paste in your copied cookie in VALUE
