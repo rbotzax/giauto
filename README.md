@@ -82,7 +82,8 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
 7. Enter `OS_COOKIE` in KEY and paste in your copied cookie in VALUE
 
   ![](https://i.imgur.com/POIwX3J.png)
-    - **IF YOU WANT TO CHECK-IN MULTIPLE GENSHIN ACCOUNTS:**
+    
+    **IF YOU WANT TO CHECK-IN MULTIPLE GENSHIN ACCOUNTS:**
     1. Paste your first cookie into the Value box on Heroku, but do not click "Add" yet.
     2. Open a new private browsing / Incognito window
     3. Go to the MiHoYo event website on your new browser instance, and log in with your second account
