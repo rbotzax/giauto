@@ -67,6 +67,7 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
    Click on the "Console" tab
 
    Type in `document.cookie` in the console
+   
 5. Copy the text output from the console  
    ![](https://imgur.com/eWP1OyO.png)
 
