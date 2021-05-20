@@ -19,6 +19,8 @@ You will need to install Git and Heroku if you wish to use Heroku for the login 
 
 Follow the instructions and sign into Heroku after installing the CLI from either command prompt or terminal whichever you use.
 
+You do not need a GitHub account to clone this repo or use the Heroku method.
+
 ## Usage
 
 1. Clone this branch
