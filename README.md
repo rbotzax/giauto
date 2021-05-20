@@ -8,6 +8,14 @@
 
 [Napkatti fork](https://github.com/napkatti/genshin-impact-helper/)
 
+
+# Running Locally
+
+Check out napkatti fork on setting variables and running locally
+[napkatti fork](https://github.com/napkatti/genshin-impact-helper/tree/master)
+
+# Heroku
+
 ## Requirements
 You will need to install Git and Heroku if you wish to use Heroku for the login helper.
 
@@ -138,3 +146,5 @@ This is an **OPTIONAL** step to let the script send you a notification on Discor
 4. Go back to the "Settings" tab on the app and add a new KEY called DISCORD_WEBHOOK and paste in the URL.
 
 To stop receiving Discord notifications, delete your DISCORD_WEBHOOK secret.
+
+
