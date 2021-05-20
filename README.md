@@ -24,11 +24,17 @@ A GitHub account is not required/needed to clone this repo, you only need a Hero
 ## Usage
 
 1. Clone this branch
+
+This will create a new folder `genshin-impact-helper` in the working directory path you executed the command, when you first open command prompt it'll usually take you to `C:\Users\YOUR-NAME`, you can type `start .` in command prompt to see where it will be cloned.
+
 ```
 git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
 ```
 
+
 2. Create a Heroku App
+
+  [Heroku Dashboard](https://dashboard.heroku.com/apps)
 
   You can either create a app from your Heroku dashboard or just run `heroku create`
 
@@ -47,7 +53,7 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
   ```
   cd genshin-impact-helper
   git init
-  heroku git:remote -a <YOUR APP NAME>  #Here im using genshin-helper-test as a example, change this to your Heroku app name
+  heroku git:remote -a genshin-helper-test  #Here im using genshin-helper-test as a example, change this to your Heroku app name
   ```
 
   ```
