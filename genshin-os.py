@@ -59,8 +59,29 @@ class Sign(Base):
             log.error('failure in get_info')
             raise
 
+    def get_region_name(self):
+        region_name_url = CONFIG.OS_ROLE_URL
+        try:
+            response = req.request(
+                'get', region_name_url, headers=self.get_header()).text
+            # get region_name base on highest character level in the server
+            character_list = req.to_python(response).get('data',{}).get('list')
+            if len(character_list) == 1:
+                return character_list[0]['region_name']
+            main_character_level = 0
+            region_name = ''
+            for data in character_list:
+                if data['level'] > main_character_level:
+                    main_character_level = data['level']
+                    region_name = data['region_name']
+            return region_name
+        except Exception as e:
+            log.error('failure in get_region_name')
+            raise
+
     def run(self):
         info_list = self.get_info()
+        region_name = self.get_region_name()
         message_list = []
         if info_list:
             today = info_list.get('data',{}).get('today')
@@ -73,7 +94,7 @@ class Sign(Base):
             time.sleep(10)
             message = {
                 'today': today,
-                'region_name': '',
+                'region_name': region_name,
                 'uid': uid,
                 'total_sign_day': total_sign_day,
                 'end': '',

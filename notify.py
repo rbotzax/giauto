@@ -26,7 +26,7 @@ class Notify(object):
                 与set_data_sub_title互斥,两者都填则本项不生效.
 
     :param DISCORD_WEBHOOK:
-        ## the original repo contained no documentation about how to use this, good luck i guess
+        ## https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
     """
     # Github Actions -> Settings -> Secrets
     # Ensure that the Name exactly matches the parameter names required here
@@ -41,7 +41,7 @@ class Notify(object):
         self.DISCORD_WEBHOOK = ''
         if 'DISCORD_WEBHOOK' in os.environ:
             self.DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
-            
+
     def pushTemplate(self, method, url, params=None, data=None, json=None, headers=None, **kwargs):
         name = kwargs.get('name')
         # needs = kwargs.get('needs')
@@ -66,8 +66,6 @@ class Notify(object):
 
     def custPush(self, text, status, desp):
         PUSH_CONFIG = self.PUSH_CONFIG
-        if 'PUSH_CONFIG' in os.environ:
-            PUSH_CONFIG = os.environ['PUSH_CONFIG']
 
         if not PUSH_CONFIG:
             log.info(f'Custom Notifications SKIPPED')
@@ -97,8 +95,6 @@ class Notify(object):
 
     def discordWebhook(self, text, status, desp):
         DISCORD_WEBHOOK = self.DISCORD_WEBHOOK
-        if 'DISCORD_WEBHOOK' in os.environ:
-            DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
 
         if not DISCORD_WEBHOOK:
             log.info(f'Discord SKIPPED')
@@ -134,4 +130,4 @@ class Notify(object):
 
 
 if __name__ == '__main__':
-    Notify().send(app='Genshin Impact Check-In Helper', status='Test Run', msg='Testing integration with social media APIs')
+    Notify().send(app='Genshin Impact Check-In Helper', status='Test Run', msg='Testing integration with social media APIs')    
