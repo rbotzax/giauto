@@ -91,6 +91,8 @@ If for some magical reason it fails to push, try `git push heroku HEAD:master` (
 5. Copy the text output from the console  
    ![](https://imgur.com/eWP1OyO.png)
 
+ If you are getting `list index out of range`
+
 **Don't copy the quotation marks**
 
 Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx; ltoken=xxxx; ltuid=696969; mi18nLang=en-us; _MHYUUID=xxx
