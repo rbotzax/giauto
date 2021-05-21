@@ -16,6 +16,12 @@ Check out napkatti fork on setting variables and running locally
 
 # Heroku
 
+[Broken Down Instructions](https://github.com/am-steph/genshin-impact-helper/wiki)
+
+Click button at bottom for next step
+
+[<img src="https://raw.githubusercontent.com/am-steph/genshin-impact-helper/master/arrow.png" width=75>](https://github.com/am-steph/genshin-impact-helper/wiki)
+
 ## Requirements
 You will need to install Git and Heroku if you wish to use Heroku for the login helper.
 
