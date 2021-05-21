@@ -16,6 +16,12 @@ Check out napkatti fork on setting variables and running locally
 
 # Heroku
 
+[Broken Down Instructions](https://github.com/am-steph/genshin-impact-helper/wiki)
+
+Click button at bottom for next step
+
+[<img src="https://raw.githubusercontent.com/am-steph/genshin-impact-helper/master/arrow.png" width=75>](https://github.com/am-steph/genshin-impact-helper/wiki)
+
 ## Requirements
 You will need to install Git and Heroku if you wish to use Heroku for the login helper.
 
@@ -33,49 +39,64 @@ A GitHub account is not required/needed to clone this repo, you only need a Hero
 
 ## Usage
 
-1. Clone this branch
+### 1. Clone this branch
 
 This will create a new folder `genshin-impact-helper` in the working directory path you executed the command, when you first open command prompt it'll usually take you to `C:\Users\YOUR-NAME`, you can type `start .` in command prompt to see where it will be cloned.
 
 ```
-git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
+git clone https://github.com/am-steph/genshin-impact-helper.git
 ```
+**Do not close the command prompt, keep it open**
 
-
-2. Create a Heroku App
+### 2. Create a Heroku App
 
   [Heroku Dashboard](https://dashboard.heroku.com/apps)
 
   You can either create a app from your Heroku dashboard or just run `heroku create`
+  
+  *If you use `heroku create`, it will make a random app name (e.g. alphine-15735)*
 
   ![](https://i.imgur.com/iqbP3Ah.png)
 
 
-3. Follow instructions in app dashboard to deploy your code to Heroku
+### 3. Follow instructions in app dashboard to deploy your code to Heroku
 
   ![](https://i.imgur.com/v0fgQ31.png)
 
+  **This is a repeat of the instructions in the image above for copy and pasting/clarification**
+  
   Login to Heroku if you haven't already. It should bring up a webpage to login.
+  
   ```
   heroku login
   ```
-  Navigate to your project folder, in this case we change to `genshin-impact-helper`. Add appropriate git remote according to your app name.
+  
+  Navigate to your project folder, because we cloned this repo we enter `cd genshin-impact-helper`
+  
   ```
   cd genshin-impact-helper
+  
   git init
-  heroku git:remote -a genshin-helper-test  #Here im using genshin-helper-test as a example, change this to your Heroku app name
+  
+  heroku git:remote -a YOUR-APP-NAME-HERE  #replace YOUR-APP-NAME-HERE with the app name of your heroku application 
   ```
 
   ```
   git add .
+  
   git commit -am "initial commit"
+  
   git push heroku master
   ```
+
+  This is roughly what it should look like and the expected output when you enter in the commands.
+  ![](https://i.imgur.com/3LzuI7o.png)
+
 
 If for some magical reason it fails to push, try `git push heroku HEAD:master` (Thanks to doraemon#9784 for finding this)
 
 
-4. Next we need to grab our cookie
+### 4. Next we need to grab our cookie
 
   To get your cookie go to the Daily Check-In event website https://webstatic-sea.mihoyo.com/ys/event/signin-sea/index.html?act_id=e202102251931481&lang=en-us
 
@@ -88,7 +109,7 @@ If for some magical reason it fails to push, try `git push heroku HEAD:master` (
 
    Type in `document.cookie` in the console
    
-5. Copy the text output from the console  
+### 5. Copy the text output from the console  
    ![](https://imgur.com/eWP1OyO.png)
 
  If you are getting `list index out of range`
@@ -99,17 +120,25 @@ Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx;
 
 The semi-colons seperate the values (e.g. `login_ticket=` and `account_id=` are different values), the order these values are in doesn't matter, it can start with `login_ticket` or it could start with `ltoken`, but make sure you have every value listed above. 
 
-6. Next we need to set up environment variables, navigate to settings and click Reveal Config  Vars
+### 6. Next we need to set up environment variables, navigate to settings and click Reveal Config Vars
 
    ![](https://i.imgur.com/5fBviLV.png)
-
-   Enter `USER_AGENT` in KEY and `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0` in VALUE and click Add.
    
-    ![](https://i.imgur.com/U592b4t.png)
+   Go to Google and type 'what is my user agent' and copy your user agent 
+   
+   ![](https://i.imgur.com/4zXcZAU.png)
+   
+   Enter `USER_AGENT` in KEY and your user agent you copied in VALUE and click Add.
+   
+   ![](https://i.imgur.com/U592b4t.png)
 
-7. Enter `OS_COOKIE` in KEY and paste in your copied cookie in VALUE
+### 7. Enter `OS_COOKIE` in KEY and paste in your copied cookie in VALUE
 
   ![](https://i.imgur.com/POIwX3J.png)
+    
+  Your token should look like this
+  
+  ![](https://i.imgur.com/eng0eF7.png)
     
     **IF YOU WANT TO CHECK-IN MULTIPLE GENSHIN ACCOUNTS:**
     1. Paste your first cookie into the Value box on Heroku, but do not click "Add" yet.
