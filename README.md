@@ -70,6 +70,8 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
   git push heroku master
   ```
 
+*If for some magical reason it fails to push, try `git push heroku HEAD:master` (Thanks to doraemon#9784 for finding this) *
+
 
 4. Next we need to grab our cookie
 
