@@ -38,15 +38,17 @@ A GitHub account is not required/needed to clone this repo, you only need a Hero
 This will create a new folder `genshin-impact-helper` in the working directory path you executed the command, when you first open command prompt it'll usually take you to `C:\Users\YOUR-NAME`, you can type `start .` in command prompt to see where it will be cloned.
 
 ```
-git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
+git clone https://github.com/am-steph/genshin-impact-helper.git
 ```
-
+**Do not close the command prompt, keep it open**
 
 2. Create a Heroku App
 
   [Heroku Dashboard](https://dashboard.heroku.com/apps)
 
   You can either create a app from your Heroku dashboard or just run `heroku create`
+  
+  *If you use `heroku create`, it will make a random app name (e.g. alphine-15735)*
 
   ![](https://i.imgur.com/iqbP3Ah.png)
 
@@ -55,22 +57,32 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
 
   ![](https://i.imgur.com/v0fgQ31.png)
 
+  **This is a repeat of the instructions above for copy and pasting**
+  
   Login to Heroku if you haven't already. It should bring up a webpage to login.
   ```
   heroku login
   ```
-  Navigate to your project folder, in this case we change to `genshin-impact-helper`. Add appropriate git remote according to your app name.
+  Navigate to your project folder, because we cloned this repo we enter `cd genshin-impact-helper`
   ```
   cd genshin-impact-helper
+  
   git init
-  heroku git:remote -a genshin-helper-test  #Here im using genshin-helper-test as a example, change this to your Heroku app name
+  
+  heroku git:remote -a YOUR-APP-NAME-HERE  #replace YOUR-APP-NAME-HERE with the app name of your heroku application 
   ```
 
   ```
   git add .
+  
   git commit -am "initial commit"
+  
   git push heroku master
   ```
+
+  This is roughly what it should look like and the expected output when you enter in the commands.
+  ![](https://i.imgur.com/3LzuI7o.png)
+
 
 If for some magical reason it fails to push, try `git push heroku HEAD:master` (Thanks to doraemon#9784 for finding this)
 
