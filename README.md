@@ -29,6 +29,8 @@ Follow the instructions and sign into Heroku after installing the CLI from eithe
 
 A GitHub account is not required/needed to clone this repo, you only need a Heroku account.
 
+**You need a credit card for the heroku-scheduler portion, don't worry they will not charge you (this is just to prevent abuse). You can use a prepaid credit card or similar for this if you don't want to use your actual card.**
+
 ## Usage
 
 1. Clone this branch
@@ -70,6 +72,8 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
   git push heroku master
   ```
 
+If for some magical reason it fails to push, try `git push heroku HEAD:master` (Thanks to doraemon#9784 for finding this)
+
 
 4. Next we need to grab our cookie
 
@@ -86,6 +90,14 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
    
 5. Copy the text output from the console  
    ![](https://imgur.com/eWP1OyO.png)
+
+ If you are getting `list index out of range`
+
+**Don't copy the quotation marks**
+
+Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx; ltoken=xxxx; ltuid=696969; mi18nLang=en-us; _MHYUUID=xxx
+
+The semi-colons seperate the values (e.g. `login_ticket=` and `account_id=` are different values), the order these values are in doesn't matter, it can start with `login_ticket` or it could start with `ltoken`, but make sure you have every value listed above. 
 
 6. Next we need to set up environment variables, navigate to settings and click Reveal Config  Vars
 
@@ -130,6 +142,8 @@ git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git
 If you want to test to see if your script will run go back to your command window and type `heroku run bash`. After you are loaded in, type `python run.py` and check.
 
 ![](https://i.imgur.com/MCPBp6J.png)
+
+There is a random sleep time inserted in the script, if it says sleeping for x amount of time just wait it out.
 
 **If you no longer want to check in automatically, you can disable/delete the scheduler**
 
