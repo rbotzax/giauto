@@ -29,6 +29,8 @@ Follow the instructions and sign into Heroku after installing the CLI from eithe
 
 A GitHub account is not required/needed to clone this repo, you only need a Heroku account.
 
+**You need a credit card for the heroku-scheduler portion, don't worry they will not charge you (this is just to prevent abuse). You can use a prepaid credit card or similar for this if you don't want to use your actual card.**
+
 ## Usage
 
 1. Clone this branch
