@@ -92,7 +92,9 @@ If for some magical reason it fails to push, try `git push heroku HEAD:master` (
    ![](https://imgur.com/eWP1OyO.png)
 
 **Don't copy the quotation marks**
+
 Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx; ltoken=xxxx; ltuid=696969; mi18nLang=en-us; _MHYUUID=xxx
+
 The semi-colons seperate the values (e.g. `login_ticket=` and `account_id=` are different values), the order these values are in doesn't matter, it can start with `login_ticket` or it could start with `ltoken`, but make sure you have every value listed above. 
 
 6. Next we need to set up environment variables, navigate to settings and click Reveal Config  Vars
