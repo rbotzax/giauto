@@ -133,6 +133,8 @@ If you want to test to see if your script will run go back to your command windo
 
 ![](https://i.imgur.com/MCPBp6J.png)
 
+There is a random sleep time inserted in the script, if it says sleeping for x amount of time just wait it out.
+
 **If you no longer want to check in automatically, you can disable/delete the scheduler**
 
 
