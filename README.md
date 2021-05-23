@@ -23,9 +23,10 @@ Click button at bottom for next step
 [<img src="https://raw.githubusercontent.com/am-steph/genshin-impact-helper/master/arrow.png" width=75>](https://github.com/am-steph/genshin-impact-helper/wiki)
 
 ### Update
-*A procfile has been added on the [heroku branch](https://github.com/am-steph/genshin-impact-helper/tree/heroku) for those that want to run from a heroku worker dyno, this does not require credit card for validation, however it will **only run for 23 days a month** as you are only allotted 550 dyno hours a month (you get another 450 hours after you validate with a credit card but if you are going to validate with a CC, might as well just use Heroku Scheduler)*
-
-If you are fine with it only operating 23 days a month, for the first step make sure to clone the heroku branch instead with
+*A procfile has been added on the [heroku branch](https://github.com/am-steph/genshin-impact-helper/tree/heroku) for those that want to run from a heroku worker dyno, this does not require credit card for validation. 
+~~however it will **only run for 23 days a month** as you are only allotted 550 dyno hours a month (you get another 450 hours after you validate with a credit card but if you are going to validate with a CC, might as well just use Heroku Scheduler)*If you are fine with it only operating 23 days a month, for the first step make sure to clone the heroku branch instead with~~
+https://devcenter.heroku.com/articles/free-dyno-hours
+Currently testing, will need more information as to if this consumes hours constantly. 
 
 `git clone --branch heroku https://github.com/am-steph/genshin-impact-helper.git`
 
