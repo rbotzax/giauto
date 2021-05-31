@@ -16,7 +16,7 @@ logging.basicConfig(
 log = logger = logging
 
 class _Config:
-    GIH_VERSION = '1.7.0.210301-alpha'
+    GIH_VERSION = '1.7.0.210301-Custom'
     LOG_LEVEL = logging.INFO
     # LOG_LEVEL = logging.DEBUG
 

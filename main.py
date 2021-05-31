@@ -1,5 +1,5 @@
 import random, time, os, schedule
-os.environ['TZ'] = 'Asia/China'
+os.environ['TZ'] = 'Asia/Singapore'
 
 def job():
     exec(open('./run.py').read())

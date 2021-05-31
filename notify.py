@@ -1,46 +1,62 @@
 import os
-from discord_webhook import DiscordWebhook, DiscordEmbed
+from urllib import parse
 from settings import log, req
 
 
 class Notify(object):
+    """Push all in one
+    :param TG_BOT_API: Telegram Bot's api address, used to reverse the proxy Telegram API address.
+    :param TG_BOT_TOKEN: Telegram Bot token. Generated when applying for bot from bot father.
+    :param TG_USER_ID: The user ID of the Telegram push object.
+    :param PUSH_CONFIG: Custom push configuration in JSON format.
+        format:
+            {"method":"post","url":"","data":{},"text":"","code":200,"data_type":"data","show_title_and_desp":false, "set_data_title":"","set_data_sub_title":"","set_data_desp":""}
+        Description:
+            method: required, request method. Default: post.
+            url: required, complete custom push link.
+            data: Optional, sent data. The default is empty, you can add additional parameters.
+            text: required, the key of the status code returned by the response body. For example: the server sauce is errno.
+            code: Required, the value of the status code returned by the response body. For example, the value of the server sauce is 0.
+            data_type: Optional, the method of sending data, optional params|json|data, default: data.
+            show_title_and_desp: Optional, whether to merge the title (application name + running status) with the running result. Default: false.
+            set_data_title: Required, fill in the key of the message title in the push method data. For example: server sauce is text.
+            set_data_sub_title: Optional, fill in the key of the message body in the push method data. The key of the body of the push method has a secondary structure,
+                Need to cooperate with set_data_title to construct children, mutually exclusive with set_data_desp.
+                For example: In the enterprise WeChat, set_data_title fills in text, set_data_sub_title fills in content.
+            set_data_desp: Optional, fill in the key of the message body in the push method data. For example: the server sauce is desp.
+                Mutually exclusive with set_data_sub_title, if both are filled, this item will not take effect.
     """
-    :param PUSH_CONFIG: JSON-formatted parameters for creating a web request to a user-specified social media API.
-        Format:
-            {"method":"post","url":"","data":{},"text":"","code":200,"data_type":"data","show_title_and_desp":false,"set_data_title":"","set_data_sub_title":"","set_data_desp":""}
-        Details:
-            method: REQUIRED, HTTP method e.g. post
-            url: REQUIRED, address of request.
-            data: OPTIONAL, parameters sent in the body of the request.
-            text: REQUIRED, key of expected response code
-            code: REQUIRED, expected response code, e.g. 0
-            data_type: OPTIONAL,format of parameters sent, CHOOSE one of: params|json|data
+    # Github Actions users, please go to Repo's Settings->Secrets to set variables, the variable name must be exactly the same as the above parameter variable name, otherwise it will be invalid!!!
+    # Name=<variable name>,Value=<obtained value>
 
-            ## no idea what any of the following is meant to do, don't ask
-            show_title_and_desp: OPTIONAL, 是否将标题(应用名+运行状态)和运行结果合并.默认: false. (don't ask I have no idea wtf this is for)
-            set_data_title: REQUIRED,填写推送方式data中消息标题的key.例如: server酱的为text.
-            set_data_sub_title: OPTIONAL,填写推送方式data中消息正文的key.有的推送方式正文的key有次级结构,
-                需配合set_data_title构造子级,与set_data_desp互斥.
-                例如: 企业微信中,set_data_title填text,set_data_sub_title填content.
-            set_data_desp: OPTIONAL,填写推送方式data中消息正文的key.例如: server酱的为desp.
-                与set_data_sub_title互斥,两者都填则本项不生效.
-
-    :param DISCORD_WEBHOOK:
-        ## https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
-    """
-    # Github Actions -> Settings -> Secrets
-    # Ensure that the Name exactly matches the parameter names required here
-    # And the Value contains the data to be used
+    # Telegram Bot
+    TG_BOT_API = 'api.telegram.org'
+    TG_BOT_TOKEN = ''
+    TG_USER_ID = ''
+    # Custom Push Config
+    PUSH_CONFIG = ''
 
     def __init__(self):
         # Custom Push Config
         self.PUSH_CONFIG = ''
         if 'PUSH_CONFIG' in os.environ:
             self.PUSH_CONFIG = os.environ['PUSH_CONFIG']
-        # Discord Webhook
-        self.DISCORD_WEBHOOK = ''
-        if 'DISCORD_WEBHOOK' in os.environ:
-            self.DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
+        # telegram
+        self.TG_BOT_TOKEN = ''
+        if 'TG_BOT_TOKEN' in os.environ:
+            TG_BOT_TOKEN = os.environ['TG_BOT_TOKEN']
+
+        self.TG_USER_ID = ''
+        if 'TG_USER_ID' in os.environ:
+            TG_USER_ID = os.environ['TG_USER_ID']
+
+        token = ''
+        if TG_BOT_TOKEN and TG_USER_ID:
+            token = 'token'
+
+        self.TG_BOT_API = ''
+        if 'TG_BOT_API' in os.environ:
+            TG_BOT_API = os.environ['TG_BOT_API']
 
     def pushTemplate(self, method, url, params=None, data=None, json=None, headers=None, **kwargs):
         name = kwargs.get('name')
@@ -49,27 +65,64 @@ class Notify(object):
         text = kwargs.get('text')
         code = kwargs.get('code')
         if not token:
-            log.info(f'{name} SKIPPED')
-            return False
+            log.info(f'{name}')
+            # log.info(f'{needs} required for {name} push is not set, skipping...')
+            return
         try:
             response = req.to_python(req.request(
                 method, url, 2, params, data, json, headers).text)
             rspcode = response[text]
         except Exception as e:
-            log.error(f'{name} FAILED\n{e}')
+            # : disabled; :success; :fail
+            log.error(f'{name}\n{e}')
         else:
             if rspcode == code:
-                log.info(f'{name} SUCCESS')
+                log.info(f'{name}')
+            # Telegram Bot
+            elif name == 'Telegram Bot' and rspcode:
+                log.info(f'{name}')
+            elif name == 'Telegram Bot' and response[code] == 400:
+                log.error(f'{name}\nPlease send a message to bot and check if TG_USER_ID is correct')
+            elif name == 'Telegram Bot' and response[code] == 401:
+                log.error(f'{name}\nTG_BOT_TOKEN error')
             else:
-                log.error(f'{name} FAILED\n{response}')
-        return True
+                log.error(f'{name}\n{response}')
+
+    def tgBot(self, text, status, desp):
+        TG_BOT_TOKEN = self.TG_BOT_TOKEN
+        if 'TG_BOT_TOKEN' in os.environ:
+            TG_BOT_TOKEN = os.environ['TG_BOT_TOKEN']
+
+        TG_USER_ID = self.TG_USER_ID
+        if 'TG_USER_ID' in os.environ:
+            TG_USER_ID = os.environ['TG_USER_ID']
+
+        token = ''
+        if TG_BOT_TOKEN and TG_USER_ID:
+            token = 'token'
+
+        TG_BOT_API = self.TG_BOT_API
+        if 'TG_BOT_API' in os.environ:
+            TG_BOT_API = os.environ['TG_BOT_API']
+
+        url = f'https://{TG_BOT_API}/bot{TG_BOT_TOKEN}/sendMessage'
+        data = {
+            'chat_id': TG_USER_ID,
+            'text': f'{text} {status}\n\n{desp}',
+            'disable_web_page_preview': True
+        }
+        conf = ['Telegram Bot', 'TG_BOT_TOKEN and TG_USER_ID', token, 'ok', 'error_code']
+        name, needs, token, text, code  = conf
+
+        return self.pushTemplate('post', url, data=data, name=name, needs=needs, token=token, text=text, code=code)
 
     def custPush(self, text, status, desp):
         PUSH_CONFIG = self.PUSH_CONFIG
+        if 'PUSH_CONFIG' in os.environ:
+            PUSH_CONFIG = os.environ['PUSH_CONFIG']
 
         if not PUSH_CONFIG:
-            log.info(f'Custom Notifications SKIPPED')
-            return False
+            return log.info(f'Custom push')
         cust = req.to_python(PUSH_CONFIG)
         title = f'{text} {status}'
         if cust['show_title_and_desp']:
@@ -83,8 +136,8 @@ class Notify(object):
             cust['data'][cust['set_data_desp']] = desp
         elif cust['set_data_title']:
             cust['data'][cust['set_data_title']] = title
-        conf = [cust['url'], cust['data'], 'Custom Notifications', cust['text'], cust['code']]
-        url, data, name, text, code = conf
+        conf = [cust['url'], cust['data'], 'Custom push', cust['text'], cust['code']]
+        url, data, name, text, code  = conf
 
         if cust['method'].upper() == 'GET':
             return self.pushTemplate('get', url, params=data, name=name, token='token', text=text, code=code)
@@ -93,41 +146,21 @@ class Notify(object):
         else:
             return self.pushTemplate('post', url, data=data, name=name, token='token', text=text, code=code)
 
-    def discordWebhook(self, text, status, desp):
-        DISCORD_WEBHOOK = self.DISCORD_WEBHOOK
-
-        if not DISCORD_WEBHOOK:
-            log.info(f'Discord SKIPPED')
-            return False
-
-        webhook = DiscordWebhook(url=DISCORD_WEBHOOK)
-        embed = DiscordEmbed(title=f'{text} {status}', description=desp, color='03b2f8')
-        webhook.add_embed(embed)
-        response = webhook.execute()
-        if (response.status_code == 200):
-            log.info(f'Discord SUCCESS')
-        else:
-            log.error(f'Discord FAILED\n{response}')
-        return True
-
     def send(self, **kwargs):
-        app  =  'Genshin Daily Sign-In'
-        status  =  kwargs . get ( 'status' , '' )
-        msg  =  kwargs . get ( 'msg' , '' )
+        app = 'GI Daily Check in'
+        status = kwargs.get('status', '')
+        msg = kwargs.get('msg', '')
         hide = kwargs.get('hide', '')
         if isinstance(msg, list) or isinstance(msg, dict):
             # msg = self.to_json(msg)
             msg = '\n\n'.join(msg)
         if not hide:
-            log.info(f'Sign-In result: {status}\n\n{msg}')
-            
-        if self.PUSH_CONFIG or self.DISCORD_WEBHOOK:
-            log.info('Sending push notifications...')
-            self.custPush(app, status, msg)
-            self.discordWebhook(app, status, msg)            
-        else:
-            log.info('No social media notifications configured to be sent.')
+            log.info(f'Check-in result: {status}\n\n{msg}')
+        log.info('Prepare push notification...')
+
+        self.tgBot(app, status, msg)
+        self.custPush(app, status, msg)
 
 
 if __name__ == '__main__':
-    Notify().send(app='Genshin Impact Check-In Helper', status='Test Run', msg='Testing integration with social media APIs')    
+    Notify().send(app='GI Daily Check in', status='Sign-in status', msg='Details')
