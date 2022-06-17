@@ -1,9 +1,9 @@
-# Genshin Impact Check-In Helper
+# Genshin Impact Auto Web Check-In Helper
 
-[Daily Check-In](https://webstatic-sea.mihoyo.com/ys/event/signin-sea/index.html?act_id=e202102251931481&lang=en-us)
+A bot for automatically daily checkin on genshin impact daily web reward
 
-[Original Repository (defunct)](https://github.com/y1ndan/genshin-impact-helper)
+# Requirement
+- Heroku Account
 
-[TakaGG fork](https://github.com/takagg/genshin-impact-helper)
 
-[Napkatti fork](https://github.com/napkatti/genshin-impact-helper/)
+
